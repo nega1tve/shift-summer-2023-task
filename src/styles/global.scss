@@ -55,7 +55,7 @@
 
   align-items: center;
   flex-shrink: 0;
-  align-items: flex-start;
+
   gap: 24px;
   align-self: stretch;
 
@@ -74,6 +74,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: 32px;
+    margin-bottom: 32px;
   }
   p {
     color: #979c9e;
@@ -94,6 +95,25 @@
     border-radius: 8px;
     border: 1px solid #979c9e;
   }
+}
+.delivery-content {
+  margin: 32px auto;
+}
+
+.calculate {
+  display: flex;
+  width: 336px;
+  padding: 16px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  border-radius: 90px;
+  border: 1px solid #780ecb;
+  background: #780ecb;
+  color: #ffffff;
+
+  margin-top: 32px;
 }
 
 .footer {
