@@ -29,11 +29,13 @@ interface Package {
 
 export const Calculator: React.FC = () => {
   const [apiData, setApiData] = useState<Point[]>([]);
-  //   const [point, setPoint] = useState<string>("");
-  const [departurePoint, setDeparturePoint] = useState<string>("1");
-  const [destinationPoint, setDestinationPoint] = useState<string>("2");
+  const [selectedDeparturePoint, setSelectedDeparturePoint] =
+    useState<Point | null>(null);
+  const [selectedDestinationPoint, setSelectedDestinationPoint] =
+    useState<Point | null>(null);
 
   const [packageTypes, setPackageTypes] = useState<Package[]>([]);
+  const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
 
   useEffect(() => {
     axios
@@ -61,6 +63,63 @@ export const Calculator: React.FC = () => {
       });
   }, []);
 
+  const handleDeparturePointChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const selectedPoint = apiData.find(
+      (point) => point.id === event.target.value
+    );
+    setSelectedDeparturePoint(selectedPoint || null);
+  };
+
+  const handleDestinationPointChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const selectedPoint = apiData.find(
+      (point) => point.id === event.target.value
+    );
+    setSelectedDestinationPoint(selectedPoint || null);
+  };
+
+  const handlePackageTypeChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const selectedPackageType = packageTypes.find(
+      (packageType) => packageType.id === event.target.value
+    );
+    setSelectedPackage(selectedPackageType || null);
+  };
+
+  const handleCalculateClick = () => {
+    if (selectedDeparturePoint && selectedDestinationPoint && selectedPackage) {
+      const requestData = {
+        package: {
+          length: selectedPackage.length.toString(),
+          width: selectedPackage.width.toString(),
+          weight: selectedPackage.weight.toString(),
+          height: selectedPackage.length.toString(),
+        },
+        senderPoint: {
+          latitude: selectedDeparturePoint.latitude.toString(),
+          longitude: selectedDeparturePoint.longitude.toString(),
+        },
+        receiverPoint: {
+          latitude: selectedDestinationPoint.latitude.toString(),
+          longitude: selectedDestinationPoint.longitude.toString(),
+        },
+      };
+
+      axios
+        .post("https://shift-backend.onrender.com/delivery/calc", requestData)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   return (
     <>
       <header className="header">
@@ -76,11 +135,10 @@ export const Calculator: React.FC = () => {
           <div>
             <p>Город отправки</p>
             <select
-              value={departurePoint}
-              onChange={(event) => setDeparturePoint(event.target.value)}
+              value={selectedDeparturePoint?.id || ""}
+              onChange={handleDeparturePointChange}
               style={{ fontWeight: 700 }}
             >
-              {/* <option value="">Москва</option> */}
               {apiData.map((point) => (
                 <option key={point.id} value={point.id}>
                   {point.name}
@@ -103,8 +161,8 @@ export const Calculator: React.FC = () => {
           <div>
             <p>Город назначения</p>
             <select
-              value={destinationPoint}
-              onChange={(event) => setDestinationPoint(event.target.value)}
+              value={selectedDestinationPoint?.id || ""}
+              onChange={handleDestinationPointChange}
               style={{ fontWeight: 700 }}
             >
               {apiData.map((point) => (
@@ -128,14 +186,33 @@ export const Calculator: React.FC = () => {
 
           <div>
             <p>Размер посылки</p>
-            <select style={{ fontWeight: 700 }}>
+            <select
+              value={selectedPackage?.id || ""}
+              onChange={handlePackageTypeChange}
+              style={{ fontWeight: 700 }}
+            >
+              <option value="">Конверт</option>
               {packageTypes.map((packageType) => (
                 <option key={packageType.id} value={packageType.id}>
                   {packageType.name}
                 </option>
               ))}
             </select>
+            {selectedPackage && (
+              <div>
+                <p>Выбранный тип посылки:</p>
+                <p>{selectedPackage.name}</p>
+                <p>Длина: {selectedPackage.length}</p>
+                <p>Ширина: {selectedPackage.width}</p>
+                <p>Высота: {selectedPackage.height}</p>
+                <p>Вес: {selectedPackage.weight}</p>
+              </div>
+            )}
           </div>
+
+          <button className="calculate" onClick={handleCalculateClick}>
+            Рассчитать
+          </button>
         </div>
       </main>
 
