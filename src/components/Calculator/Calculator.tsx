@@ -128,6 +128,7 @@ export const Calculator: React.FC = () => {
 
       <main className="main">
         <img src="../../../img/Planet.png" alt="" />
+        {/* Зачем надпись, если в фоне она уже есть?! */}
         {/* <p>ЦФТ доставка - быстро, удобно, надежно!</p> */}
 
         <div className="calculate-delivery">
@@ -139,6 +140,7 @@ export const Calculator: React.FC = () => {
               onChange={handleDeparturePointChange}
               style={{ fontWeight: 700 }}
             >
+              {/* бага с  первым значением */}
               {apiData.map((point) => (
                 <option key={point.id} value={point.id}>
                   {point.name}
@@ -165,6 +167,7 @@ export const Calculator: React.FC = () => {
               onChange={handleDestinationPointChange}
               style={{ fontWeight: 700 }}
             >
+              {/* и тут бага с  первым значением */}
               {apiData.map((point) => (
                 <option key={point.id} value={point.id}>
                   {point.name}
@@ -191,7 +194,9 @@ export const Calculator: React.FC = () => {
               onChange={handlePackageTypeChange}
               style={{ fontWeight: 700 }}
             >
+              {/* Нужно сделать таб для ввода данных вручную */}
               <option value="">Конверт</option>
+              {/* и здесь тоже бага с  первым значением */}
               {packageTypes.map((packageType) => (
                 <option key={packageType.id} value={packageType.id}>
                   {packageType.name}
