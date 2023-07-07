@@ -4,7 +4,7 @@ import { Delivery } from "./components/Delivery/Delivery";
 function App(): JSX.Element {
   return (
     <>
-      {/* <Calculator /> */}
+      <Calculator />
       <Delivery />
     </>
   );
