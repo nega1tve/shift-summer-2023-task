@@ -1,7 +1,7 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
-interface apiData {
+interface deliveryData {
   id: string;
   name: string;
   latitude: number;
@@ -20,16 +20,20 @@ interface Package {
 export const useCalculatorStore = create(
   persist(
     (set) => ({
-      apiData: [],
+      deliveryData: [],
       selectedDeparturePoint: null,
       selectedDestinationPoint: null,
+
       packageTypes: [],
       selectedPackage: null,
-      setApiData: (apiData: apiData) => set(() => ({ apiData })),
-      setSelectedDeparturePoint: (selectedDeparturePoint: apiData) =>
+
+      setDeliveryData: (deliveryData: deliveryData) =>
+        set(() => ({ deliveryData })),
+      setSelectedDeparturePoint: (selectedDeparturePoint: deliveryData) =>
         set(() => ({ selectedDeparturePoint })),
-      setSelectedDestinationPoint: (selectedDestinationPoint: apiData) =>
+      setSelectedDestinationPoint: (selectedDestinationPoint: deliveryData) =>
         set(() => ({ selectedDestinationPoint })),
+
       setPackageTypes: (packageTypes: Package) => set(() => ({ packageTypes })),
       setSelectedPackage: (selectedPackage: Package) =>
         set(() => ({ selectedPackage })),

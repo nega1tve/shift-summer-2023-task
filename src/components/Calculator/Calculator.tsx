@@ -1,125 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
 // import { useCalculatorStore } from './calculatorStore';
-
-interface ApiResponsePoint {
-  success: boolean;
-  points: Point[];
-}
-
-interface Point {
-  id: string;
-  name: string;
-  latitude: number;
-  longitude: number;
-}
-
-interface ApiResponsePackage {
-  success: boolean;
-  packages: Package[];
-}
-
-interface Package {
-  id: string;
-  name: string;
-  length: number;
-  width: number;
-  height: number;
-  weight: number;
-}
+import useCalculator from "../../utils/hooks/Calculator/useCalculator";
 
 export const Calculator: React.FC = () => {
-  const [apiData, setApiData] = useState<Point[]>([]);
-  const [selectedDeparturePoint, setSelectedDeparturePoint] =
-    useState<Point | null>(null);
-  const [selectedDestinationPoint, setSelectedDestinationPoint] =
-    useState<Point | null>(null);
-
-  const [packageTypes, setPackageTypes] = useState<Package[]>([]);
-  const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
-
-  useEffect(() => {
-    axios
-      .get<ApiResponsePoint>(
-        "https://shift-backend.onrender.com/delivery/points"
-      )
-      .then((response) => {
-        setApiData(response.data.points);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get<ApiResponsePackage>(
-        "https://shift-backend.onrender.com/delivery/package/types"
-      )
-      .then((response) => {
-        setPackageTypes(response.data.packages);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  const handleDeparturePointChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const selectedPoint = apiData.find(
-      (point) => point.id === event.target.value
-    );
-    setSelectedDeparturePoint(selectedPoint || null);
-  };
-
-  const handleDestinationPointChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const selectedPoint = apiData.find(
-      (point) => point.id === event.target.value
-    );
-    setSelectedDestinationPoint(selectedPoint || null);
-  };
-
-  const handlePackageTypeChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const selectedPackageType = packageTypes.find(
-      (packageType) => packageType.id === event.target.value
-    );
-    setSelectedPackage(selectedPackageType || null);
-  };
-
-  const handleCalculateClick = () => {
-    if (selectedDeparturePoint && selectedDestinationPoint && selectedPackage) {
-      const requestData = {
-        package: {
-          length: selectedPackage.length.toString(),
-          width: selectedPackage.width.toString(),
-          weight: selectedPackage.weight.toString(),
-          height: selectedPackage.length.toString(),
-        },
-        senderPoint: {
-          latitude: selectedDeparturePoint.latitude.toString(),
-          longitude: selectedDeparturePoint.longitude.toString(),
-        },
-        receiverPoint: {
-          latitude: selectedDestinationPoint.latitude.toString(),
-          longitude: selectedDestinationPoint.longitude.toString(),
-        },
-      };
-
-      axios
-        .post("https://shift-backend.onrender.com/delivery/calc", requestData)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
+  const {
+    deliveryData,
+    selectedDeparturePoint,
+    selectedDestinationPoint,
+    packageTypes,
+    selectedPackage,
+    handleDeparturePointChange,
+    handleDestinationPointChange,
+    handlePackageTypeChange,
+    handleCalculateClick,
+  } = useCalculator();
 
   return (
     <>
@@ -128,7 +24,7 @@ export const Calculator: React.FC = () => {
       </header>
 
       <main className="main">
-        <img src="../../../img/Planet.png" alt="" />
+        <img src="../../../img/planet.png" alt="" />
         {/* Зачем надпись, если в фоне она уже есть?! */}
         {/* <p>ЦФТ доставка - быстро, удобно, надежно!</p> */}
 
@@ -142,7 +38,7 @@ export const Calculator: React.FC = () => {
               style={{ fontWeight: 700 }}
             >
               {/* бага с  первым значением */}
-              {apiData.map((point) => (
+              {deliveryData.map((point) => (
                 <option key={point.id} value={point.id}>
                   {point.name}
                 </option>
@@ -169,7 +65,7 @@ export const Calculator: React.FC = () => {
               style={{ fontWeight: 700 }}
             >
               {/* и тут бага с  первым значением */}
-              {apiData.map((point) => (
+              {deliveryData.map((point) => (
                 <option key={point.id} value={point.id}>
                   {point.name}
                 </option>
