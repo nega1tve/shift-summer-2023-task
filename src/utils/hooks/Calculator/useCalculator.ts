@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { useFetchPoints, useFetchPackages } from "..";
+import { useCalculatorStore } from "../../../stores/calculatorStore";
 
 interface Point {
   id: string;
@@ -20,12 +21,11 @@ interface Package {
 }
 
 const useCalculator = () => {
-  //   const [deliveryData, setDeliveryData] = useState<Point[]>([]);
   const [selectedDeparturePoint, setSelectedDeparturePoint] =
     useState<Point | null>(null);
   const [selectedDestinationPoint, setSelectedDestinationPoint] =
     useState<Point | null>(null);
-  //   const [packageTypes, setPackageTypes] = useState<Package[]>([]);
+
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
 
   const deliveryData = useFetchPoints();
