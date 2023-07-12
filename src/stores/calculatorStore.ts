@@ -1,46 +1,19 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
-interface deliveryData {
-  id: string;
-  name: string;
-  latitude: number;
-  longitude: number;
-}
-
-interface Package {
-  id: string;
-  name: string;
-  length: number;
-  width: number;
-  height: number;
-  weight: number;
-}
+import { useFetchPoints, useFetchPackages } from "../utils/hooks";
 
 export const useCalculatorStore = create(
   persist(
     (set) => ({
       deliveryData: [],
-      selectedDeparturePoint: null,
-      selectedDestinationPoint: null,
-
       packageTypes: [],
-      selectedPackage: null,
-
-      setDeliveryData: (deliveryData: deliveryData) =>
-        set(() => ({ deliveryData })),
-      setSelectedDeparturePoint: (selectedDeparturePoint: deliveryData) =>
-        set(() => ({ selectedDeparturePoint })),
-      setSelectedDestinationPoint: (selectedDestinationPoint: deliveryData) =>
-        set(() => ({ selectedDestinationPoint })),
-
-      setPackageTypes: (packageTypes: Package) => set(() => ({ packageTypes })),
-      setSelectedPackage: (selectedPackage: Package) =>
-        set(() => ({ selectedPackage })),
+      setDeliveryData: (data) => set({ deliveryData: data }),
+      setPackageTypes: (data) => set({ packageTypes: data }),
     }),
     {
       name: "calculator-store",
-      getStorage: () => sessionStorage,
+      getStorage: () => localStorage,
     }
   )
 );

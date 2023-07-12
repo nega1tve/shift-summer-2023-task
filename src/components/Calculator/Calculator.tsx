@@ -1,3 +1,4 @@
+import { usePointStore } from "../../stores/pointsStore";
 import useCalculator from "../../utils/hooks/Calculator/useCalculator";
 
 import { Header, DeliveryCalculator, Footer } from "../Calculator";
@@ -15,12 +16,17 @@ export const Calculator: React.FC = () => {
     handleCalculateClick,
   } = useCalculator();
 
+  const [points, packages] = usePointStore((state) => [
+    state.points,
+    state.packages,
+  ]);
+
   return (
     <>
       <Header />
 
       <main className="main">
-        <img src="../../../img/planet.png" alt="" />
+        <img src="../../../img/Calculator/planet.png" alt="" />
 
         <p>ЦФТ доставка - быстро, удобно, надежно!</p>
 

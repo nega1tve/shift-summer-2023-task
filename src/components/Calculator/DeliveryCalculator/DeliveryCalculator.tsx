@@ -1,4 +1,7 @@
 import React from "react";
+import { usePointStore } from "../../../stores/pointsStore";
+
+import styles from "./index.module.scss";
 
 interface DeliveryCalculatorProps {
   deliveryData: Point[];
@@ -41,8 +44,32 @@ export const DeliveryCalculator: React.FC<DeliveryCalculatorProps> = ({
   onPackageTypeChange,
   onCalculateClick,
 }) => {
+  const points = usePointStore((state) => state.points);
+  const packages = usePointStore((state) => state.packages);
+
+  console.log(points);
+
   return (
-    <div className="calculate-delivery">
+    <div className={styles.calculateDelivery}>
+      <div>
+        {points.map((point) => (
+          <div key={point.id}>
+            <h3>{point.name}</h3>
+            <p>Latitude: {point.latitude}</p>
+            <p>Longitude: {point.longitude}</p>
+          </div>
+        ))}
+
+        {packages.map((pack) => (
+          <div key={pack.id}>
+            <h3>{pack.name}</h3>
+            <p>Length: {pack.length}</p>
+            <p>Width: {pack.width}</p>
+            <p>Height: {pack.height}</p>
+            <p>Weight: {pack.weight}</p>
+          </div>
+        ))}
+      </div>
       <h1>Рассчитать доставку</h1>
       <div>
         <label>Город отправки</label>
@@ -119,7 +146,7 @@ export const DeliveryCalculator: React.FC<DeliveryCalculatorProps> = ({
         )}
       </div>
 
-      <button className="calculate" onClick={onCalculateClick}>
+      <button className={styles.calculate} onClick={onCalculateClick}>
         Рассчитать
       </button>
     </div>

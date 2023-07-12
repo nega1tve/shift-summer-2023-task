@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import styles from "./index.module.scss";
+
 export const Delivery: React.FC = () => {
   const [deliveryType, setDeliveryType] = useState<string>("standard");
 
