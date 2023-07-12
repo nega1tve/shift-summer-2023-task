@@ -16,6 +16,8 @@ export const Calculator: React.FC = () => {
     handleCalculateClick,
   } = useCalculator();
 
+  // Вызывал хранилище и пробовал дёргать данные в других компонентах.
+  // После вызова и внесения данные, они есть только тут
   const [points, packages] = usePointStore((state) => [
     state.points,
     state.packages,

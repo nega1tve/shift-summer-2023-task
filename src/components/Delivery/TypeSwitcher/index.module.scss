@@ -1,0 +1,31 @@
+.deliveryTypeSwitcher {
+  display: flex;
+  justify-content: center;
+}
+
+.deliveryTypeSwitcher input[type="radio"] {
+  appearance: none;
+}
+
+.deliveryTypeOption {
+  width: 472px;
+  height: 148px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #efefef;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  margin-right: 24px;
+}
+
+.selected {
+  background: #780ecb;
+  color: #fff;
+  border: none;
+}

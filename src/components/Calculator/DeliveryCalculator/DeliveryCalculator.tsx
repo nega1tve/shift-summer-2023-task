@@ -44,6 +44,8 @@ export const DeliveryCalculator: React.FC<DeliveryCalculatorProps> = ({
   onPackageTypeChange,
   onCalculateClick,
 }) => {
+  // Проверка работы stora, не работает.
+  // При вызове в одном компоненте, данные не прокидываются в другие
   const points = usePointStore((state) => state.points);
   const packages = usePointStore((state) => state.packages);
 
