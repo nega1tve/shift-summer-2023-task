@@ -31,6 +31,7 @@
     line-height: 32px;
     margin-bottom: 32px;
   }
+
   label {
     color: #979c9e;
     font-size: 14px;
@@ -39,6 +40,7 @@
     font-weight: 400;
     line-height: 16px;
   }
+
   select {
     display: flex;
     width: 422px;
@@ -46,11 +48,22 @@
     justify-content: center;
     align-items: center;
     gap: 12px;
-
+    font-weight: 700;
     border-radius: 8px;
     border: 1px solid #979c9e;
   }
+
+  .textUnderline {
+    display: flex;
+
+    p {
+      text-decoration: underline;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+  }
 }
+
 .delivery-content {
   margin: 32px auto;
 }

@@ -49,7 +49,7 @@ export const DeliveryCalculator: React.FC<DeliveryCalculatorProps> = ({
   const points = usePointStore((state) => state.points);
   const packages = usePointStore((state) => state.packages);
 
-  console.log(points);
+  // console.log(points);
 
   return (
     <div className={styles.calculateDelivery}>
@@ -78,7 +78,6 @@ export const DeliveryCalculator: React.FC<DeliveryCalculatorProps> = ({
         <select
           value={selectedDeparturePoint?.id || ""}
           onChange={onDeparturePointChange}
-          style={{ fontWeight: 700 }}
         >
           {deliveryData.map((point) => (
             <option key={point.id} value={point.id}>
@@ -86,14 +85,9 @@ export const DeliveryCalculator: React.FC<DeliveryCalculatorProps> = ({
             </option>
           ))}
         </select>
-        <div style={{ display: "flex" }}>
+        <div className={styles.textUnderline}>
           {deliveryData.slice(0, 3).map((point) => (
-            <p
-              key={point.id}
-              style={{ textDecoration: "underline", marginRight: "5px" }}
-            >
-              {point.name}
-            </p>
+            <p key={point.id}>{point.name}</p>
           ))}
         </div>
       </div>
@@ -103,7 +97,6 @@ export const DeliveryCalculator: React.FC<DeliveryCalculatorProps> = ({
         <select
           value={selectedDestinationPoint?.id || ""}
           onChange={onDestinationPointChange}
-          style={{ fontWeight: 700 }}
         >
           {deliveryData.map((point) => (
             <option key={point.id} value={point.id}>
@@ -111,14 +104,9 @@ export const DeliveryCalculator: React.FC<DeliveryCalculatorProps> = ({
             </option>
           ))}
         </select>
-        <div style={{ display: "flex" }}>
+        <div className={styles.textUnderline}>
           {deliveryData.slice(1, 4).map((point) => (
-            <p
-              key={point.id}
-              style={{ textDecoration: "underline", marginRight: "5px" }}
-            >
-              {point.name}
-            </p>
+            <p key={point.id}>{point.name}</p>
           ))}
         </div>
       </div>
@@ -128,7 +116,6 @@ export const DeliveryCalculator: React.FC<DeliveryCalculatorProps> = ({
         <select
           value={selectedPackage?.id || ""}
           onChange={onPackageTypeChange}
-          style={{ fontWeight: 700 }}
         >
           {packageTypes.map((packageType) => (
             <option key={packageType.id} value={packageType.id}>
