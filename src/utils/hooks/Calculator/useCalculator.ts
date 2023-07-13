@@ -31,6 +31,9 @@ const useCalculator = () => {
   const deliveryData = useFetchPoints();
   const packageTypes = useFetchPackages();
 
+  const [isDeliveryVisible, setDeliveryVisible] = useState(false);
+  const [isCalculatorVisible, setCalculatorVisible] = useState(true);
+
   const handleDeparturePointChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -84,6 +87,8 @@ const useCalculator = () => {
         )
         .then((response) => {
           console.log(response.data);
+          setCalculatorVisible(false);
+          setDeliveryVisible(true);
         })
         .catch((error) => {
           console.log(error);
@@ -101,6 +106,8 @@ const useCalculator = () => {
     handleDestinationPointChange,
     handlePackageTypeChange,
     handleCalculateClick,
+    isDeliveryVisible,
+    isCalculatorVisible,
   };
 };
 

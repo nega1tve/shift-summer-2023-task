@@ -1,7 +1,8 @@
-import { usePointStore } from "../../stores/pointsStore";
-import useCalculator from "../../utils/hooks/Calculator/useCalculator";
+import { Delivery } from "../Delivery";
 
 import { Header, DeliveryCalculator, Footer } from "../Calculator";
+
+import useCalculator from "../../utils/hooks/Calculator/useCalculator";
 
 export const Calculator: React.FC = () => {
   const {
@@ -14,38 +15,47 @@ export const Calculator: React.FC = () => {
     handleDestinationPointChange,
     handlePackageTypeChange,
     handleCalculateClick,
+    isDeliveryVisible,
+    isCalculatorVisible,
   } = useCalculator();
 
-  // Вызывал хранилище и пробовал дёргать данные в других компонентах.
-  // После вызова и внесения данные, они есть только тут
-  const [points, packages] = usePointStore((state) => [
-    state.points,
-    state.packages,
-  ]);
+  // проверка добавления данных в хранилище
+  // const [points, packages] = usePointStore((state) => [
+  //   state.points,
+  //   state.packages,
+  // ]);
 
   return (
     <>
-      <Header />
+      {isCalculatorVisible && (
+        <div>
+          <Header />
 
-      <main className="main">
-        <img src="../../../img/Calculator/planet.png" alt="" />
+          <main className="main">
+            <img
+              src="../../../assets/img/Calculator/planet.png"
+              alt="pic not working, sorry (˚ ˃̣̣̥⌓˂̣̣̥ )"
+            />
 
-        <p>ЦФТ доставка - быстро, удобно, надежно!</p>
+            <p>ЦФТ доставка - быстро, удобно, надежно!</p>
 
-        <DeliveryCalculator
-          deliveryData={deliveryData}
-          selectedDeparturePoint={selectedDeparturePoint}
-          selectedDestinationPoint={selectedDestinationPoint}
-          packageTypes={packageTypes}
-          selectedPackage={selectedPackage}
-          onDeparturePointChange={handleDeparturePointChange}
-          onDestinationPointChange={handleDestinationPointChange}
-          onPackageTypeChange={handlePackageTypeChange}
-          onCalculateClick={handleCalculateClick}
-        />
-      </main>
+            <DeliveryCalculator
+              deliveryData={deliveryData}
+              selectedDeparturePoint={selectedDeparturePoint}
+              selectedDestinationPoint={selectedDestinationPoint}
+              packageTypes={packageTypes}
+              selectedPackage={selectedPackage}
+              onDeparturePointChange={handleDeparturePointChange}
+              onDestinationPointChange={handleDestinationPointChange}
+              onPackageTypeChange={handlePackageTypeChange}
+              onCalculateClick={handleCalculateClick}
+            />
+          </main>
 
-      <Footer />
+          <Footer />
+        </div>
+      )}
+      {isDeliveryVisible && <Delivery />}
     </>
   );
 };

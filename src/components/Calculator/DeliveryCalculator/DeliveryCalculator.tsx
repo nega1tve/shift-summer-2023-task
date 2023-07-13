@@ -112,7 +112,7 @@ export const DeliveryCalculator: React.FC<DeliveryCalculatorProps> = ({
           ))}
         </select>
         <div style={{ display: "flex" }}>
-          {deliveryData.slice(0, 3).map((point) => (
+          {deliveryData.slice(1, 4).map((point) => (
             <p
               key={point.id}
               style={{ textDecoration: "underline", marginRight: "5px" }}
