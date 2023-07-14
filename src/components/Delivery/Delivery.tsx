@@ -1,17 +1,27 @@
 import React, { useState } from "react";
-
 import {
   TypeSwitcher,
-  RecipientData,
   SenderData,
+  RecipientData,
   SenderAddress,
   DeliveryAddress,
+  PaymentOptions,
 } from "..";
+import { useDelivery } from "./hooks/useDelivery";
 
 import styles from "./index.module.scss";
-import { PaymentOptions } from "./PaymentOptions";
 
 export const Delivery: React.FC = () => {
+  const {
+    recipientData,
+    senderAddress,
+    deliveryAddress,
+    handleRecipientDataChange,
+    handleSenderAddressChange,
+    handleDeliveryAddressChange,
+    handleSubmit,
+  } = useDelivery();
+
   const [deliveryType, setDeliveryType] = useState<string>("standard");
 
   const handleDeliveryTypeChange = (
@@ -31,13 +41,28 @@ export const Delivery: React.FC = () => {
           handleDeliveryTypeChange={handleDeliveryTypeChange}
         />
 
-        <RecipientData />
         <SenderData />
-        <SenderAddress />
-        <DeliveryAddress />
+
+        <RecipientData
+          recipientData={recipientData}
+          handleRecipientDataChange={handleRecipientDataChange}
+        />
+
+        <SenderAddress
+          senderAddress={senderAddress}
+          handleSenderAddressChange={handleSenderAddressChange}
+        />
+
+        <DeliveryAddress
+          deliveryAddress={deliveryAddress}
+          handleDeliveryAddressChange={handleDeliveryAddressChange}
+        />
+
         <PaymentOptions />
 
-        <button className={styles.calculate}>Оформить</button>
+        <button className={styles.calculate} onClick={handleSubmit}>
+          Оформить
+        </button>
       </div>
     </div>
   );

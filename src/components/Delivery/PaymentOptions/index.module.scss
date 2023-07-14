@@ -1,15 +1,3 @@
-.containerDelivery {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.buttonDelivery {
-  position: absolute;
-  top: calc(10% - 80px);
-  left: 70%;
-}
-
 .sheet {
   display: inline-flex;
   padding: 40px 81px;
@@ -17,48 +5,15 @@
   align-items: center;
   gap: 40px;
   margin-top: 120px;
-
   border-radius: 24px;
   background: #fff;
   box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.4);
-
-  h1 {
-    color: #000;
-    text-align: center;
-    font-family: Inter;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 40px;
-  }
-}
-
-.buttonLogin {
-  margin-left: auto;
-  margin-right: 100px;
-  margin-top: 40px;
-  width: 204px;
-  height: 40px;
-  background: var(--dark, #23262f);
-  border-radius: 90px;
-
-  color: var(--neutrals-8, #fcfcfd);
-  text-align: center;
-  font-size: 14px;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 16px;
 }
 
 .selected {
   background: #780ecb;
   color: #fff;
   border: none;
-}
-
-.deliveryTypeSwitcher input[type="radio"] {
-  appearance: none;
 }
 
 .deliveryInfo {
@@ -71,19 +26,8 @@
   background: #efefef;
   padding: 20px;
 
-  h2 {
-    color: #000;
-    text-align: center;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    width: 300px;
-    margin: 0px 0 24px;
-  }
-
   input[type="radio"] {
+    margin: 24px 0;
     width: 15px;
     height: 15px;
   }

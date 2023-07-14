@@ -8,12 +8,22 @@ export const PaymentOptions: React.FC = () => {
       <h2>Кто оплачивает доставку</h2>
       <div className={styles.toggleContainer}>
         <label htmlFor="receiver">
-          <input type="radio" id="receiver" name="payment" value="receiver" />
+          <input
+            type="radio"
+            id={styles.receiver}
+            name="payment"
+            value="receiver"
+          />
           <span className={styles.toggleOption}></span>
           <span>Получатель</span>
         </label>
         <label htmlFor="sender">
-          <input type="radio" id="sender" name="payment" value="sender" />
+          <input
+            type="radio"
+            id={styles.sender}
+            name="payment"
+            value="sender"
+          />
           <span className={styles.toggleOption}></span>
           <span>Отправитель</span>
         </label>

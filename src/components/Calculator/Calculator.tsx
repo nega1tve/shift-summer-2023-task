@@ -4,6 +4,8 @@ import { Header, DeliveryCalculator, Footer } from "../Calculator";
 
 import useCalculator from "../../utils/hooks/Calculator/useCalculator";
 
+import styles from "./index.module.scss";
+
 export const Calculator: React.FC = () => {
   const {
     deliveryData,
@@ -32,12 +34,15 @@ export const Calculator: React.FC = () => {
           <Header />
 
           <main className="main">
-            <img
-              src="../../../assets/img/Calculator/planet.png"
-              alt="pic not working, sorry (˚ ˃̣̣̥⌓˂̣̣̥ )"
-            />
-
-            <p>ЦФТ доставка - быстро, удобно, надежно!</p>
+            <div className={styles.imageContainer}>
+              <img
+                src="../../../assets/img/Calculator/planet.png"
+                alt="pic not working, sorry (˚ ˃̣̣̥⌓˂̣̣̥ )"
+              />
+              <p className={styles.imageText}>
+                ЦФТ доставка - быстро, удобно, надежно!
+              </p>
+            </div>
 
             <DeliveryCalculator
               deliveryData={deliveryData}
