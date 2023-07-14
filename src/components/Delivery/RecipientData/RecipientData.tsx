@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./index.module.scss";
+import styles from "./RecipientData.module.scss";
 
 interface RecipientDataProps {
   recipientData: {

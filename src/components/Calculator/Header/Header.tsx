@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Login } from "../..";
 
-import styles from "./index.module.scss";
+import styles from "./Header.module.scss";
 
-export const Header: React.FC = () => {
+export const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {

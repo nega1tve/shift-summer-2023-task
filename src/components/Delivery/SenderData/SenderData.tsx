@@ -1,4 +1,4 @@
-import styles from "./index.module.scss";
+import styles from "./SenderData.module.scss";
 
 export const SenderData = () => {
   return (

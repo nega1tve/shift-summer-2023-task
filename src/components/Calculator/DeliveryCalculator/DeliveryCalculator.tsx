@@ -1,7 +1,7 @@
 import React from "react";
 import { usePointStore } from "../../../stores/pointsStore";
 
-import styles from "./index.module.scss";
+import styles from "./DeliveryCalculator.module.scss";
 
 interface DeliveryCalculatorProps {
   deliveryData: Point[];

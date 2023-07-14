@@ -9,7 +9,7 @@ import {
 } from "..";
 import { useDelivery } from "./hooks/useDelivery";
 
-import styles from "./index.module.scss";
+import styles from "./Delivery.module.scss";
 
 export const Delivery: React.FC = () => {
   const {

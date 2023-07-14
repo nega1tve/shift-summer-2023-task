@@ -4,7 +4,7 @@ import { Header, DeliveryCalculator, Footer } from "../Calculator";
 
 import useCalculator from "../../utils/hooks/Calculator/useCalculator";
 
-import styles from "./index.module.scss";
+import styles from "./Calculator.module.scss";
 
 export const Calculator: React.FC = () => {
   const {
@@ -21,7 +21,7 @@ export const Calculator: React.FC = () => {
     isCalculatorVisible,
   } = useCalculator();
 
-  // проверка добавления данных в хранилище
+  // TODO: сделать хранилище
   // const [points, packages] = usePointStore((state) => [
   //   state.points,
   //   state.packages,
